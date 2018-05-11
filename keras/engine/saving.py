@@ -837,6 +837,9 @@ def _need_convert_kernel(original_backend):
     uses_correlation = {'tensorflow': True,
                         'theano': False,
                         'cntk': True}
+    if K.backend() not in uses_correlation:
+        # another backend replaced
+        return False
     return uses_correlation[original_backend] != uses_correlation[K.backend()]
 
 
